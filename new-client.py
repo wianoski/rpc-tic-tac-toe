@@ -63,16 +63,16 @@ class Player(object):
 	#can have human or computer players
 	pass
 
-class HumanPlayer(Player):
-	#an instance of the player class
+# class HumanPlayer(Player):
+#     	#an instance of the player class
 
-	def __init__(self, symbol):
-		self.symbol = symbol
+# 	def __init__(self, symbol):
+# 		self.symbol = symbol
 
-	def get_move():
-		move = 0
-		while (move == 0):
-			print("It's your move player " + self.symbol)
+# 	def get_move():
+# 		move = 0
+# 		while (move == 0):
+# 			print("It's your move player " + self.symbol)
 
 class ComputerPlayer(Player):
 	#an instance of the player class
@@ -128,8 +128,8 @@ tic_tac_toe = xmlrpclib.ServerProxy('http://localhost:8000/tic-tac-toe')
 game_id = tic_tac_toe.new_game()
 
 print "New game is started! Game Id: " + str(game_id)     
-player1 = HumanPlayer("X")
-player2 = HumanPlayer("O")
+player1 = tic_tac_toe.HumanPlayer("X")
+player2 = tic_tac_toe.HumanPlayer("O")
 my_board = Board()
 my_game = Game(my_board, player1, player2)
 my_game.play()

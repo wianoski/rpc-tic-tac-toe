@@ -6,12 +6,25 @@ import random
 import sys
 import copy
 
+class Player(object):
+    	#can have human or computer players
+	pass
 # Restrict to a particular path.
 class RequestHandler(SimpleXMLRPCRequestHandler):
 	    rpc_paths = ('/tic-tac-toe',)
 
 # Create Game Hub
 games = {}
+class HumanPlayer(Player):
+    	#an instance of the player class
+
+	def __init__(self, symbol):
+		self.symbol = symbol
+
+	def get_move():
+		move = 0
+		while (move == 0):
+			print("It's your move player " + self.symbol)
 
 def new_game():
     game_id = randint(0, 9999999)
