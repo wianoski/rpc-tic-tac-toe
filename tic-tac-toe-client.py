@@ -65,6 +65,7 @@ def main():
 
         # Get player input
         user = get_input()
+        user2 = get_input()
         while tic_tac_toe.is_move_invalid(game_id, user):
             print "Invalid move! Cell already taken. Please try again.\n"
             user = get_input()

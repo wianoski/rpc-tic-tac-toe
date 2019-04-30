@@ -69,18 +69,18 @@ def new_move(game_id, index):
 #     move = _choose_random_move(board, [1,3,5,7])
 #     return move
 
-def _choose_random_move(board, move_list):
-    possible_winning_moves = []
-    for index in move_list:
-        if _is_move_valid(board, index):
-            possible_winning_moves.append(index)
+# def _choose_random_move(board, move_list):
+#     possible_winning_moves = []
+#     for index in move_list:
+#         if _is_move_valid(board, index):
+#             possible_winning_moves.append(index)
 
-    if len(possible_winning_moves) != 0:
-        return random.choice(possible_winning_moves)
-    else:
-        return None
+#     if len(possible_winning_moves) != 0:
+#         return random.choice(possible_winning_moves)
+#     else:
+#         return None
 
-def is_move_invalid(game_id, index):
+def is_move_invalid(game_id, index1, index2):
     board = games[game_id]
     return board[index] != -1
 
