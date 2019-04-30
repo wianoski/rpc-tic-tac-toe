@@ -15,16 +15,13 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 
 # Create Game Hub
 games = {}
-class HumanPlayer(Player):
+def HumanPlayer(Player):
     	#an instance of the player class
-
-	def __init__(self, symbol):
-		self.symbol = symbol
-
+	symbol = symbol
 	def get_move():
 		move = 0
 		while (move == 0):
-			print("It's your move player " + self.symbol)
+			print("It's your move player " + symbol)
 
 def new_game():
     game_id = randint(0, 9999999)
@@ -45,6 +42,7 @@ def main():
     # Create server
     server = SimpleXMLRPCServer(("localhost", 8000), requestHandler=RequestHandler, logRequests=True)
     server.register_introspection_functions()
+    server.register_function(HumanPlayer, 'humanPlayer')
     server.register_function(new_game, 'new_game')
     
     try:
