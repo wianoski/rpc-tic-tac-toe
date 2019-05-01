@@ -10,7 +10,7 @@
   "keywords": [
     "game"
   ],
-  "author": "Rajesh Pillai",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",

@@ -44,7 +44,12 @@ function isGameOver() {
         if (rows[i] === matches[0] || rows[i] === matches[1]) {
             return true;
         }
+        if (!rows[i]){
+            return false;
+            console.log("seri");
+        }
     }
+    
     return false;
 }
 
