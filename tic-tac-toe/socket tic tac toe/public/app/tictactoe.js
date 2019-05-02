@@ -15,7 +15,7 @@ function getBoardState() {
     // that are on the board into an array of cells 
     // Every cell contains either 'X', 'O' or ''
     $('.cell').each(function () {
-        obj[$(this).attr('id')] = $(this).text() || '';
+        obj[$(this).attr('id')] = $(this).text() || 'null';
     });
 
     console.log("state: ", obj);
@@ -39,33 +39,36 @@ function isGameOver() {
         state.a2 + state.b2 + state.c2
     ];
 
-    // var loseRows = [
-    //     state.a0, state.a1, state.a2,
-    //     state.b0, state.b1, state.b2,
-    //     state.c0, state.c1, state.c2,
-    // ];
-    // console.log("Loses",loseRows);
+    var cek = [
+        state.a0, state.a1, state.a2,
+        state.b0, state.b1, state.b2,
+        state.c0, state.c1, state.c2    
+    ];
+
 
     // Loop over all of the rows and check if any of them compare
     // to either 'XXX' or 'OOO'
     for (var i = 0; i < rows.length; i++) {
         if (rows[i] === matches[0] || rows[i] === matches[1]) {
             return true;
-        }else if (rows.length == 8) {
-            console.log('Seri');
-        }
-        
-        
+        }     
     }
+
+    console.log("cek board : ", cek)
+
+    let temp = rows.length + 1;
+
+    for (let i= 0; i< cek.length; i++) {
+        if (cek[i] === 'X' || cek[i] === 'O'){
+            temp--;
+        }
+        if (temp === 0){
+            
+            console.log("Seri")
+        }
+    }
+    console.log(temp);   
     
-    // for (var i = 0; i < rows.length; i++) {
-    //     if (rows[i] === notMatches[0] || rows[i] === notMatches[1] || rows[i] === notMatches[2] || rows[i] === notMatches[3] || rows[i] === notMatches[4] || rows[i] === notMatches[5]){
-    //         console.log('Not matches')
-    //     }
-        
-    // }
-    
-        
     return false;
 }
 
@@ -87,7 +90,7 @@ function renderTurnMessage() {
         //$('.board button').removeAttr('disabled');
         $('.cell').removeAttr('disabled');
 
-    }
+    } 
 }
 
 function makeMove(e) {
@@ -128,8 +131,10 @@ socket.on('move.made', function (data) {
     if (myTurn) {
         $('#messages').text('Game over. You lost.');
         // Show the message for the winner
-    } else {
+    } else if(!myTurn){
         $('#messages').text('Game over. You won!');
+    } else {
+        $('#messages').text('Game over. Seri');
     }
 
     // Disable the board
