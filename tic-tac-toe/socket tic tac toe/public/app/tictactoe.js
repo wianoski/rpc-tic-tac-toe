@@ -71,11 +71,53 @@ function isGameOver() {
     
     return false;
 }
+function isSame() {
+    var state = getBoardState();
+    console.log("Board State: ", state);
 
-// function isSeri(){
-//     var state = getBoardState();
+    // These are all of the possible combinations
+    // that would win the game
+    var rows = [
+        state.a0 + state.a1 + state.a2,
+        state.b0 + state.b1 + state.b2,
+        state.c0 + state.c1 + state.c2,
+        state.a0 + state.b1 + state.c2,
+        state.a2 + state.b1 + state.c0,
+        state.a0 + state.b0 + state.c0,
+        state.a1 + state.b1 + state.c1,
+        state.a2 + state.b2 + state.c2
+    ];
 
-// }
+    var cek = [
+        state.a0, state.a1, state.a2,
+        state.b0, state.b1, state.b2,
+        state.c0, state.c1, state.c2    
+    ];
+
+    console.log("cek board : ", cek)
+
+    let temp = rows.length + 1;
+
+    for (let i= 0; i< cek.length; i++) {
+        if (cek[i] === 'X' || cek[i] === 'O'){
+            temp--;
+        }
+        if (temp === 0){
+            $('#messages').text('Seri');
+            $('.cell').attr('disabled', true);
+            console.log("Seri")
+        }
+    }
+    console.log(temp);   
+    
+    return false;
+}
+
+function renderIsSame(){
+    if(!myTurn){
+        $('#messagesSeri').text('seri');
+    }
+}
 
 function renderTurnMessage() {
     // Disable the board if it is the opponents turn
@@ -90,7 +132,11 @@ function renderTurnMessage() {
         //$('.board button').removeAttr('disabled');
         $('.cell').removeAttr('disabled');
 
-    } 
+    } if (isSame()){
+        $('#messages').text('Habis.');
+        //$('.board button').removeAttr('disabled');
+        $('.cell').removeAttr('disabled');
+    }
 }
 
 function makeMove(e) {
@@ -117,7 +163,7 @@ function makeMove(e) {
 socket.on('move.made', function (data) {
     // Render the move, data.position holds the target cell ID
     $('#' + data.position).text(data.symbol);
-
+    
     // If the symbol is the same as the player's symbol,
     // we can assume it is their turn
     myTurn = (data.symbol !== symbol);
@@ -127,16 +173,18 @@ socket.on('move.made', function (data) {
         return renderTurnMessage();
     }
 
+    // if(isSame()){
+    //     return renderIsSame();
+    // }
+
     // If the game is over Show the message for the loser
     if (myTurn) {
         $('#messages').text('Game over. You lost.');
         // Show the message for the winner
-    } else if(!myTurn){
-        $('#messages').text('Game over. You won!');
     } else {
-        $('#messages').text('Game over. Seri');
+        $('#messages').text('Game over. You won!');
     }
-
+    socket.emit('result', myTurn)
     // Disable the board
     //$('.board button').attr('disabled', true);
     $('.cell').attr('disabled', true);
