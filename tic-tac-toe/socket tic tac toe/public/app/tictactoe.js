@@ -5,7 +5,8 @@ var socket = io.connect(),  //io('http://localhost:5000'),
 // value for
 // the game to be over
 var matches = ['XXX', 'OOO'];
-
+var notMatches = ['XOX', 'XXO', 'OXX', 'OXO', 'OOX', 'XOO'];
+var maxGames = 8;
 
 function getBoardState() {
     var obj = {};
@@ -38,20 +39,40 @@ function isGameOver() {
         state.a2 + state.b2 + state.c2
     ];
 
+    // var loseRows = [
+    //     state.a0, state.a1, state.a2,
+    //     state.b0, state.b1, state.b2,
+    //     state.c0, state.c1, state.c2,
+    // ];
+    // console.log("Loses",loseRows);
+
     // Loop over all of the rows and check if any of them compare
     // to either 'XXX' or 'OOO'
     for (var i = 0; i < rows.length; i++) {
         if (rows[i] === matches[0] || rows[i] === matches[1]) {
             return true;
+        }else if (rows.length == 8) {
+            console.log('Seri');
         }
-        if (!rows[i]){
-            return false;
-            console.log("seri");
-        }
+        
+        
     }
     
+    // for (var i = 0; i < rows.length; i++) {
+    //     if (rows[i] === notMatches[0] || rows[i] === notMatches[1] || rows[i] === notMatches[2] || rows[i] === notMatches[3] || rows[i] === notMatches[4] || rows[i] === notMatches[5]){
+    //         console.log('Not matches')
+    //     }
+        
+    // }
+    
+        
     return false;
 }
+
+// function isSeri(){
+//     var state = getBoardState();
+
+// }
 
 function renderTurnMessage() {
     // Disable the board if it is the opponents turn

@@ -2,6 +2,8 @@ var express = require('express'),
     app = express(),
     http = require('http').Server(app);
 
+const io = require('socket.io')(http);
+
 
 app.use(express.static('public'));
 
@@ -16,10 +18,9 @@ http.listen(port, function () {
 });
 
 
-const io = require('socket.io')(http);
-
 var players = {},
     unmatched;
+
 
 function joinGame(socket) {
 
@@ -62,9 +63,10 @@ function getOpponent(socket) {
 }
 
 io.on('connection', function (socket) {
-    console.log("Connection established...", socket.id);
+    console.log("Connection established...");
+    console.log("Player's Socket : ", socket.id);
     joinGame(socket);
-
+    
     // Once the socket has an opponent, we can begin the game
     if (getOpponent(socket)) {
         socket.emit('game.begin', {
@@ -73,6 +75,7 @@ io.on('connection', function (socket) {
         getOpponent(socket).emit('game.begin', {
             symbol: players[getOpponent(socket).id].symbol
         });
+        
     }
 
     // Listens for a move to be made and emits an event to both
