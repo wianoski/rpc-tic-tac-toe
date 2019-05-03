@@ -8,7 +8,7 @@ const io = require('socket.io')(http);
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 let port = 5000;
