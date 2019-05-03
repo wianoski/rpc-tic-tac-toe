@@ -71,6 +71,7 @@ function isGameOver() {
     
     return false;
 }
+
 function isSame() {
     var state = getBoardState();
     console.log("Board State: ", state);
