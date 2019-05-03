@@ -76,18 +76,7 @@ function isSame() {
     var state = getBoardState();
     console.log("Board State: ", state);
 
-    // These are all of the possible combinations
-    // that would win the game
-    var rows = [
-        state.a0 + state.a1 + state.a2,
-        state.b0 + state.b1 + state.b2,
-        state.c0 + state.c1 + state.c2,
-        state.a0 + state.b1 + state.c2,
-        state.a2 + state.b1 + state.c0,
-        state.a0 + state.b0 + state.c0,
-        state.a1 + state.b1 + state.c1,
-        state.a2 + state.b2 + state.c2
-    ];
+    //create board for checking current 
 
     var cek = [
         state.a0, state.a1, state.a2,
@@ -97,7 +86,7 @@ function isSame() {
 
     console.log("cek board : ", cek)
 
-    let temp = rows.length + 1;
+    let temp = cek.length;
 
     for (let i= 0; i< cek.length; i++) {
         if (cek[i] === 'X' || cek[i] === 'O'){
