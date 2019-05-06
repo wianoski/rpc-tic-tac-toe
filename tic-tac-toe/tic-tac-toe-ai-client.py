@@ -65,18 +65,18 @@ def main():
 
         # Get player input
         user = get_input()
-        user2 = get_input()
+        # user2 = get_input()
         while tic_tac_toe.is_move_invalid(game_id, user):
             print "Invalid move! Cell already taken. Please try again.\n"
             user = get_input()
-        while tic_tac_toe.is_move_invalid(game_id, user2):
-            print "Invalid move! Cell already taken. Please try again.\n"
-            user2 = get_input()
+        # while tic_tac_toe.is_move_invalid(game_id, user2):
+        #     print "Invalid move! Cell already taken. Please try again.\n"
+        #     user2 = get_input()
 
       
 
         board = tic_tac_toe.new_move(game_id, user)
-        board = tic_tac_toe.new_move(game_id, user2)
+        # board = tic_tac_toe.new_move(game_id, user2)
         print_board(board)
 
         # Continue move and check if end of game
