@@ -110,7 +110,7 @@ def end_game(game_id):
 
 def main():
     # Create server
-    server = SimpleXMLRPCServer(("localhost", 8000), requestHandler=RequestHandler, logRequests=True)
+    server = SimpleXMLRPCServer(("192.168.43.4 ", 5000), requestHandler=RequestHandler, logRequests=True)
     server.register_introspection_functions()
     server.register_function(new_game, 'new_game')
     server.register_function(new_move, 'new_move')

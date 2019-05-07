@@ -54,7 +54,7 @@ def quit_game(board, msg):
 
 
 def main():
-    tic_tac_toe = xmlrpclib.ServerProxy('http://127.0.0.1:8000/tic-tac-toe')
+    tic_tac_toe = xmlrpclib.ServerProxy('http://192.168.43.4:5000/tic-tac-toe')
     game_id = tic_tac_toe.new_game()
     print_instruction()
     print "New game is started! Game Id: " + str(game_id)
