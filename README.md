@@ -1,2 +1,2 @@
 # tic-tac-toe
-Minus syarat menang, dan inputan player 2
+This repository is created for SWE-545 Distrubuted System Programming course @Bogazici University 
